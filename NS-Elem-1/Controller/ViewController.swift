@@ -58,7 +58,9 @@ class ViewController: UIViewController {
         //print(totalNumberOfQuestions)
         
         //answerTxt.isFirstResponder = true
-        self.answerTxt.becomeFirstResponder()
+        answerTxt.becomeFirstResponder()
+        
+
     }
 
     @IBOutlet weak var checkBtn: UILabel!
@@ -219,6 +221,7 @@ class ViewController: UIViewController {
             //print(totalNumberOfQuestions)
             questionLbl.text = allQuestions.list[questionNumber].question
             questionNumberLbl.text = "Question #\(questionNumber + 1)"
+
         }
         else {
             isTesting = false
@@ -231,6 +234,8 @@ class ViewController: UIViewController {
             answerTxt.text = ""
             answerTxt.textColor = (UIColor.red)
             questionNumberLbl.text = ""
+
+            
             
 
         }
@@ -299,9 +304,9 @@ class ViewController: UIViewController {
     func trackMarkedQuestions(){
         let trackedQuestion = allQuestions.list[questionNumber].question
         let trackedAnswer = allQuestions.list[questionNumber].answer
-        let trackedAnswer2 = allQuestions.list[questionNumber].answer2
         
-        markedQuestions.append(Question(questionText: trackedQuestion, answerText: trackedAnswer, answerText2: trackedAnswer2 ))
+        
+        markedQuestions.append(Question(questionText: trackedQuestion, answerText: trackedAnswer))
         
         //print(trackedQuestion, trackedAnswer, trackedAnswer2)
         
