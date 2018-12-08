@@ -24,22 +24,15 @@ class ViewController: UIViewController {
     var numberAttempts: Int = 0
     
     var totalNumberOfQuestions: Int = 0
-    var markedQuestionsCount: Int = 0
-    var isTesting: Bool = true
-    var isLoadedTrackedQuestions: Bool = false
-    
-    
+
     var timer = Timer()
     var counter = 0.0
     var isRunning = false
-    
-    var markedQuestions = [Question]()
     
     let congratulateArray = ["Great Job", "Excellent", "Way to go", "Alright", "Right on", "Correct", "Well done", "Awesome","Give me a high five"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         questionNumber = 0
         
