@@ -9,12 +9,10 @@
 import Foundation
 
 class Question {
-    let question: String
-    let answer: String
+    let answer: Int
 
     
-    init(questionText: String, answerText: String){
-        question = questionText
+    init(answerText: Int){
         answer = answerText
 
     }
