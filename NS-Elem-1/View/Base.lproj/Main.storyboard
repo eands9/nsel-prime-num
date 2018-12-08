@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="nsel_sqrt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="nsel_prime_num" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -70,12 +70,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question #00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5P-rV-XvJ">
-                                                <rect key="frame" x="96.5" y="158" width="105" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMU-de-pXf">
                                                 <rect key="frame" x="0.0" y="243" width="66" height="21"/>
                                                 <constraints>
@@ -93,7 +87,6 @@
                                             <constraint firstAttribute="trailing" secondItem="x7X-eg-0tV" secondAttribute="trailing" id="Bld-la-Ih5"/>
                                             <constraint firstAttribute="trailing" secondItem="th9-e1-kU2" secondAttribute="trailing" id="D2t-44-z03"/>
                                             <constraint firstItem="KYe-H6-QLi" firstAttribute="top" secondItem="x7X-eg-0tV" secondAttribute="bottom" constant="25" id="Hus-AV-VJF"/>
-                                            <constraint firstItem="G5P-rV-XvJ" firstAttribute="centerX" secondItem="M1Z-y1-xS5" secondAttribute="centerX" id="RJC-Ya-d16"/>
                                             <constraint firstItem="fMU-de-pXf" firstAttribute="leading" secondItem="M1Z-y1-xS5" secondAttribute="leading" id="VRA-ej-ilL"/>
                                             <constraint firstAttribute="height" constant="264" id="VlG-HA-NjZ"/>
                                             <constraint firstItem="KYe-H6-QLi" firstAttribute="centerX" secondItem="x7X-eg-0tV" secondAttribute="centerX" id="Xk6-lJ-qPm"/>
@@ -101,7 +94,6 @@
                                             <constraint firstItem="x7X-eg-0tV" firstAttribute="top" secondItem="M1Z-y1-xS5" secondAttribute="top" id="dAl-3M-r3u"/>
                                             <constraint firstAttribute="bottom" secondItem="oTe-Ik-8xI" secondAttribute="bottom" id="etN-Mg-1GS"/>
                                             <constraint firstAttribute="bottom" secondItem="th9-e1-kU2" secondAttribute="bottom" id="gOP-hB-ClB"/>
-                                            <constraint firstItem="G5P-rV-XvJ" firstAttribute="top" secondItem="x7X-eg-0tV" secondAttribute="bottom" constant="2" id="itJ-Zu-83y"/>
                                             <constraint firstAttribute="bottom" secondItem="fMU-de-pXf" secondAttribute="bottom" id="rKI-BD-haq"/>
                                             <constraint firstItem="oTe-Ik-8xI" firstAttribute="centerX" secondItem="M1Z-y1-xS5" secondAttribute="centerX" id="sPh-AR-05w"/>
                                             <constraint firstAttribute="bottom" secondItem="fMU-de-pXf" secondAttribute="bottom" id="tvm-ja-mbc"/>
@@ -132,7 +124,6 @@
                         <outlet property="chkBtn" destination="oTe-Ik-8xI" id="kbQ-hs-eLQ"/>
                         <outlet property="progressLbl" destination="th9-e1-kU2" id="Fq4-Qy-a2x"/>
                         <outlet property="questionLbl" destination="x7X-eg-0tV" id="phD-KY-iMV"/>
-                        <outlet property="questionNumberLbl" destination="G5P-rV-XvJ" id="oIt-RV-fPh"/>
                         <outlet property="timerLbl" destination="fMU-de-pXf" id="DKS-KC-gSY"/>
                     </connections>
                 </viewController>

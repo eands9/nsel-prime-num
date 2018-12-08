@@ -17,6 +17,8 @@ class QuestionList {
         list.append(Question(answerText: 2))
         list.append(Question(answerText: 3))
         list.append(Question(answerText: 5))
+        
+        /*
         list.append(Question(answerText: 7))
         list.append(Question(answerText: 11))
         list.append(Question(answerText: 13))
@@ -39,6 +41,6 @@ class QuestionList {
         list.append(Question(answerText: 83))
         list.append(Question(answerText: 89))
         list.append(Question(answerText: 97))
-        
+        */
     }
 }

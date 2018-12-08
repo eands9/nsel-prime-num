@@ -22,7 +22,6 @@ class ViewController: UIViewController {
     var randomPick: Int = 0
     var correctAnswers: Int = 0
     var numberAttempts: Int = 0
-    var numberFailed: Int = 0
     
     var totalNumberOfQuestions: Int = 0
     var markedQuestionsCount: Int = 0
@@ -37,7 +36,6 @@ class ViewController: UIViewController {
     var markedQuestions = [Question]()
     
     let congratulateArray = ["Great Job", "Excellent", "Way to go", "Alright", "Right on", "Correct", "Well done", "Awesome","Give me a high five"]
-    let retryArray = ["Try again","Oooops"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +54,6 @@ class ViewController: UIViewController {
         
         //answerTxt.isFirstResponder = true
         answerTxt.becomeFirstResponder()
-        
-
     }
 
     @IBOutlet weak var checkBtn: UILabel!
@@ -80,11 +76,8 @@ class ViewController: UIViewController {
             correctAnswers += 1
             numberAttempts += 1
             updateProgress()
-            numberFailed = 0
-
         }
         else {
-            numberFailed += 1
             readMe(myText: "Try again")
             answerTxt.text = ""
             numberAttempts += 1
@@ -110,70 +103,28 @@ class ViewController: UIViewController {
     func nextQuestion(){
         chkBtn .isEnabled = true
         answerTxt.text = ""
-        answerTxt.textColor = (UIColor.black)
-        questionNumber += 1
         
-        if questionNumber <= totalNumberOfQuestions - 1  {
-            //print(totalNumberOfQuestions)
-            questionLbl.text = allQuestions.list[questionNumber].question
-            questionNumberLbl.text = "Question #\(questionNumber + 1)"
-            
+        if questionNumber <= totalNumberOfQuestions - 2  {
+            questionNumber += 1
         }
         else {
-            isTesting = false
             timer.invalidate()
-            readMe(myText: "Let us review")
             
-            questionNumber = 0
-            questionLbl.text = markedQuestions[questionNumber].question
-            questionLbl.textColor = (UIColor.red)
-            answerTxt.text = ""
-            answerTxt.textColor = (UIColor.red)
-            questionNumberLbl.text = ""
-            
-            
-            
-            
-        }
-    }
-    
-    func nextQuestionIsTesting(){
-        chkBtn .isEnabled = true
-        answerTxt.text = ""
-        answerTxt.textColor = (UIColor.black)
-        questionNumber += 1
-        
-        if questionNumber <= totalNumberOfQuestions - 1  {
-            //print(totalNumberOfQuestions)
-            questionLbl.text = allQuestions.list[questionNumber].question
-            questionNumberLbl.text = "Question #\(questionNumber + 1)"
-
-        }
-        else {
             chkBtn .isEnabled = false
             let alert = UIAlertController(title: "Awesome", message: "You've finished all the questions, do you want to start over again?", preferredStyle: .alert)
             
             let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (UIAlertAction) in
                 self.startOver()
-                
             })
-            
             alert.addAction(restartAction)
             present(alert, animated: true, completion: nil)
-
         }
     }
 
-    
     func startOver(){
         
-        isTesting = true
-        
         questionNumber = 0
-        questionNumberLbl.text = "Question #\(questionNumber + 1)"
-        let firstAnswer = allQuestions.list[0].answer
-        questionLbl.text = firstAnswer
-        
+
         counter = 0
         timerLbl.text = "\(counter)"
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
@@ -190,9 +141,6 @@ class ViewController: UIViewController {
         correctAnswers = 0
         numberAttempts = 0
         updateProgress()
-        
-        chkBtn .isEnabled = true
-        
     }
 
     func updateProgress(){
