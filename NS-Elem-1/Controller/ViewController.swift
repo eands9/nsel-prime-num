@@ -44,9 +44,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         questionNumber = 0
-        questionNumberLbl.text = "Question #\(questionNumber + 1)"
-        let firstQuestion = allQuestions.list[0].question
-        questionLbl.text = firstQuestion
         
         timerLbl.text = "\(counter)"
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
@@ -72,39 +69,9 @@ class ViewController: UIViewController {
     
     @IBAction func chkBtn(_ sender: Any) {
         
-        if isTesting == true {
-            testTaking()
-        }
-        else {
-            testReview()
-        }
-        
-
-        
-    }
-    
-    func testTaking(){
-        
-        /*
-        let answerValueStr = Int(allQuestions.list[questionNumber].answer)
-        let answerValueStr2 = allQuestions.list[questionNumber].answer2
-        
-        let answerValueInt = 1 * answerValueStr
-        let answerValueInt2 = Int(answerValueStr2)
-        let answerInt = Int(answerTxt.text!)
-        
-       
-        if answerInt >= answerValueInt && answerInt <= answerValueInt2 {
-            
-        }
-        else{
-            
-        }
-        */
-        
         let correctAnswer = allQuestions.list[questionNumber].answer
         
-        if answerTxt.text == correctAnswer{
+        if answerTxt.text == String(correctAnswer){
             //congratulate
             randomPositiveFeedback()
             
@@ -114,77 +81,17 @@ class ViewController: UIViewController {
             numberAttempts += 1
             updateProgress()
             numberFailed = 0
+
         }
-            
-        else
-            if numberFailed == 1{
-                
-                readMe(myText: "The correct answer is")
-                answerTxt.textColor = (UIColor.red)
-                answerTxt.text = correctAnswer
-                numberAttempts += 1
-                updateProgress()
-                chkBtn .isEnabled = false
-                let when = DispatchTime.now() + 3
-                DispatchQueue.main.asyncAfter(deadline: when){
-                    //next problem
-                    self.nextQuestion()
-                    self.numberFailed = 0
-                    
-                }
-                
-                //Keep track of questions that were answered incorrectly
-                trackMarkedQuestions()
-                
-            }
-            else {
-                numberFailed += 1
-                readMe(myText: "Try again")
-                answerTxt.text = ""
-                numberAttempts += 1
-                updateProgress()
-        }
-        
-        //var testMarkedQQ = markedQuestions[1].question
-        //print (testMarkedQQ)
-        //let totalMarkedCont = markedQuestions.count
-        //print (totalMarkedCont)
-    }
-    
-    func testReview(){
-        
-        
-        let correctAnswer = markedQuestions[questionNumber].answer
-        
-        if answerTxt.text == correctAnswer{
-            //congratulate
-            randomPositiveFeedback()
-            
-            //next Question
-            nextQuestionIsReview()
-            /*
-            correctAnswers += 1
+        else {
+            numberFailed += 1
+            readMe(myText: "Try again")
+            answerTxt.text = ""
             numberAttempts += 1
             updateProgress()
-            numberFailed = 0
-             */
         }
-            
-        else{
-                
-                readMe(myText: "The correct answer is")
-                answerTxt.textColor = (UIColor.red)
-                answerTxt.text = correctAnswer
-
-                chkBtn .isEnabled = false
-                let when = DispatchTime.now() + 3
-                DispatchQueue.main.asyncAfter(deadline: when){
-                    //next problem
-                    self.nextQuestion()
-                }
-            }
     }
-    
+   
     func readMe( myText: String) {
         let utterance = AVSpeechUtterance(string: myText )
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
@@ -201,14 +108,33 @@ class ViewController: UIViewController {
     }
     
     func nextQuestion(){
-        if isTesting == true  {
-            nextQuestionIsTesting()
+        chkBtn .isEnabled = true
+        answerTxt.text = ""
+        answerTxt.textColor = (UIColor.black)
+        questionNumber += 1
+        
+        if questionNumber <= totalNumberOfQuestions - 1  {
+            //print(totalNumberOfQuestions)
+            questionLbl.text = allQuestions.list[questionNumber].question
+            questionNumberLbl.text = "Question #\(questionNumber + 1)"
+            
         }
         else {
-            nextQuestionIsReview()
-            print("running nextQuestionIsReview EH")
+            isTesting = false
+            timer.invalidate()
+            readMe(myText: "Let us review")
+            
+            questionNumber = 0
+            questionLbl.text = markedQuestions[questionNumber].question
+            questionLbl.textColor = (UIColor.red)
+            answerTxt.text = ""
+            answerTxt.textColor = (UIColor.red)
+            questionNumberLbl.text = ""
+            
+            
+            
+            
         }
-
     }
     
     func nextQuestionIsTesting(){
@@ -224,35 +150,6 @@ class ViewController: UIViewController {
 
         }
         else {
-            isTesting = false
-            timer.invalidate()
-            readMe(myText: "Let us review")
-            
-            questionNumber = 0
-            questionLbl.text = markedQuestions[questionNumber].question
-            questionLbl.textColor = (UIColor.red)
-            answerTxt.text = ""
-            answerTxt.textColor = (UIColor.red)
-            questionNumberLbl.text = ""
-
-            
-            
-
-        }
-    }
-    
-    func nextQuestionIsReview(){
-        
-        questionNumber += 1
-        answerTxt.text = ""
-        chkBtn .isEnabled = true
-        
-        if questionNumber <= markedQuestionsCount - 1  {
-            //print(totalNumberOfQuestions)
-            questionLbl.text = markedQuestions[questionNumber].question
-            //questionNumberLbl.text = "Question #\(questionNumber + 1)"
-        }
-        else {
             chkBtn .isEnabled = false
             let alert = UIAlertController(title: "Awesome", message: "You've finished all the questions, do you want to start over again?", preferredStyle: .alert)
             
@@ -263,9 +160,10 @@ class ViewController: UIViewController {
             
             alert.addAction(restartAction)
             present(alert, animated: true, completion: nil)
-            
+
         }
     }
+
     
     func startOver(){
         
@@ -273,8 +171,8 @@ class ViewController: UIViewController {
         
         questionNumber = 0
         questionNumberLbl.text = "Question #\(questionNumber + 1)"
-        let firstQuestion = allQuestions.list[0].question
-        questionLbl.text = firstQuestion
+        let firstAnswer = allQuestions.list[0].answer
+        questionLbl.text = firstAnswer
         
         counter = 0
         timerLbl.text = "\(counter)"
@@ -299,25 +197,6 @@ class ViewController: UIViewController {
 
     func updateProgress(){
         progressLbl.text = "\(correctAnswers) / \(numberAttempts)"
-    }
-    
-    func trackMarkedQuestions(){
-        let trackedQuestion = allQuestions.list[questionNumber].question
-        let trackedAnswer = allQuestions.list[questionNumber].answer
-        
-        
-        markedQuestions.append(Question(questionText: trackedQuestion, answerText: trackedAnswer))
-        
-        //print(trackedQuestion, trackedAnswer, trackedAnswer2)
-        
-        
-        
-        //var testMarkedQQ = markedQuestions[markedQuestionsCount].question
-        //print (testMarkedQQ)
-        
-        markedQuestionsCount += 1
-    
-
     }
 }
 
