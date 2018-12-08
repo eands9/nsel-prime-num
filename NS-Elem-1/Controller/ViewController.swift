@@ -29,12 +29,15 @@ class ViewController: UIViewController {
     var counter = 0.0
     var isRunning = false
     
-    let congratulateArray = ["Great Job", "Excellent", "Way to go", "Alright", "Right on", "Correct", "Well done", "Awesome","Give me a high five"]
+    var primeNumbers = [Int]()
+    
+    let congratulateArray = ["Great Job", "Excellent", "Way to go", "Alright", "Right on", "Correct", "Well done", "Awesome","Give me a high five","You are so smart","Superb"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         questionNumber = 0
+        questionLbl.text = ""
         
         timerLbl.text = "\(counter)"
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
@@ -64,6 +67,9 @@ class ViewController: UIViewController {
             //congratulate
             randomPositiveFeedback()
             
+            primeNumbers.append(allQuestions.list[questionNumber].answer)
+            questionLbl.text = "\(primeNumbers)"
+            
             //next Question
             nextQuestion()
             correctAnswers += 1
@@ -88,7 +94,7 @@ class ViewController: UIViewController {
     }
     
     func randomPositiveFeedback(){
-        randomPick = Int(arc4random_uniform(9))
+        randomPick = Int(arc4random_uniform(11))
         readMe(myText: congratulateArray[randomPick])
         
     }
@@ -117,7 +123,8 @@ class ViewController: UIViewController {
     func startOver(){
         
         questionNumber = 0
-
+        questionLbl.text = ""
+        
         counter = 0
         timerLbl.text = "\(counter)"
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
